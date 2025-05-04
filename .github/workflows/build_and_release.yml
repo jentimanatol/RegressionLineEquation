@@ -29,6 +29,7 @@ jobs:
       - name: Upload Release 
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/critical_r_value_app.exe
+          # Set the tag name to the current version
+          files: dist/RegressionLineEquation.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
