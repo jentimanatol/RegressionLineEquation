@@ -80,9 +80,9 @@ def compute_and_plot(data):
 n = {n}
 
 Numerator = n * Σxy - Σx * Σy 
-Denominator =
-= √[(n * Σx² - (Σx)²) * (n * Σy² - (Σy)²)] 
+Denominator = √[(n * Σx² - (Σx)²) * (n * Σy² - (Σy)²)] 
 Numerator = {numerator}
+
 Denominator = {denominator:.4f}
 
 r = {r:.4f}

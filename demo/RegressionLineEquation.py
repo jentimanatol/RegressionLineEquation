@@ -7,7 +7,7 @@ import ast
 
 # Create root window
 root = tk.Tk()
-root.title("Regression Line Analyzer by Anatolie Jentimir")
+root.title("Regression Line Visualizer by Anatolie Jentimir")
 root.geometry("2500x1750")
 
 # Matplotlib figure and axis
@@ -40,20 +40,14 @@ def compute_and_plot(data):
         sum_y2 = sum(y_squared)
         sum_xy = sum(xy_products)
 
-        # Calculate correlation coefficient (r)
         numerator = n * sum_xy - sum_x * sum_y
         denominator = np.sqrt((n * sum_x2 - sum_x**2) * (n * sum_y2 - sum_y**2))
         r = numerator / denominator if denominator != 0 else 0
 
-        # Linear regression using least squares
         slope, intercept = np.polyfit(x_vals, y_vals, 1)
         y_fit = [slope * x + intercept for x in x_vals]
         ax.plot(x_vals, y_fit, color='red', label=f"Best Fit Line: y = {slope:.3f}x + {intercept:.3f}")
-
-        # Scatter plot
         ax.scatter(x_vals, y_vals, color='blue', s=100, label='Data Points')
-
-        # Annotate r-value
         ax.annotate(f'r = {r:.4f}', xy=(0.05, 0.95), xycoords='axes fraction',
                     fontsize=14, backgroundcolor='white')
 
@@ -65,7 +59,6 @@ def compute_and_plot(data):
 
         canvas.draw()
 
-        # Table display
         table_text = "x\t y\t x²\t y²\t xy\n"
         for x, y, x2, y2, xy in zip(x_vals, y_vals, x_squared, y_squared, xy_products):
             table_text += f"{x}\t {y}\t {x2}\t {y2}\t {xy}\n"
@@ -89,7 +82,10 @@ r = {r:.4f}
 """
         summary_label.config(text=summary_text)
 
-        # Interpretation
+        regression_label.config(
+            text=f"Best Fit Line Equation:\n  y = {slope:.3f}x + {intercept:.3f}"
+        )
+
         if r >= 0.9:
             desc = "Very strong positive correlation"
         elif r >= 0.7:
@@ -135,20 +131,20 @@ def load_data_and_plot():
         compute_and_plot(data)
 
 def save_plot():
-    file_path = filedialog.asksaveasfilename(defaultextension=".png",
-                                             filetypes=[("PNG files", "*.png")])
+    file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
     if file_path:
         fig.savefig(file_path)
         messagebox.showinfo("Saved", f"Plot saved to:\n{file_path}")
 
 def save_data():
-    file_path = filedialog.asksaveasfilename(defaultextension=".txt",
-                                             filetypes=[("Text files", "*.txt")])
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
     if file_path:
         with open(file_path, "w") as f:
             f.write(table_label.cget("text"))
             f.write("\n")
             f.write(summary_label.cget("text"))
+            f.write("\n")
+            f.write(regression_label.cget("text"))
             f.write("\n")
             f.write(interpretation_label.cget("text"))
         messagebox.showinfo("Saved", f"Data saved to:\n{file_path}")
@@ -159,7 +155,7 @@ def exit_app():
 # Layout
 top_frame = tk.Frame(root, bg="#e6f0ff", padx=10, pady=5)
 top_frame.pack(fill=tk.X)
-tk.Label(top_frame, text="📈 Regression Line Analyzer", bg="#e6f0ff", font=("Arial", 28, "bold")).pack(side=tk.LEFT)
+tk.Label(top_frame, text="📈 Regression Line Visualizer", bg="#e6f0ff", font=("Arial", 28, "bold")).pack(side=tk.LEFT)
 
 control_frame = tk.Frame(root, pady=10)
 control_frame.pack(fill=tk.X)
@@ -174,11 +170,10 @@ btn_frame = tk.Frame(control_frame)
 btn_frame.pack(pady=10)
 
 tk.Button(btn_frame, text="🔍 Analyze", command=load_data_and_plot, font=("Arial", 20), bg="#007acc", fg="white").pack(side=tk.LEFT, padx=10)
-tk.Button(btn_frame, text="💾 Save Plot", command=save_plot, font=("Arial", 20), bg="#28a745", fg="white").pack(side=tk.LEFT, padx=10)
+tk.Button(btn_frame, text="📂 Save Plot", command=save_plot, font=("Arial", 20), bg="#28a745", fg="white").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="📝 Save Data", command=save_data, font=("Arial", 20), bg="#ffc107", fg="black").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="❌ Exit", command=exit_app, font=("Arial", 20), bg="#cc0000", fg="white").pack(side=tk.LEFT, padx=10)
 
-# Main Panels
 main_frame = tk.Frame(root)
 main_frame.pack(fill=tk.BOTH, expand=True)
 
@@ -198,6 +193,9 @@ table_label.pack(pady=(0, 10), padx=5, anchor="w")
 
 summary_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", font=("Courier", 20))
 summary_label.pack(pady=(0, 10), padx=5, anchor="w")
+
+regression_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", font=("Courier", 20))
+regression_label.pack(pady=(0, 10), padx=5, anchor="w")
 
 tk.Label(right_panel, text="📐 Regression Formula", font=("Helvetica", 26, "bold"), bg="#f0f6ff", fg="#003366").pack(pady=(5, 2))
 tk.Label(
