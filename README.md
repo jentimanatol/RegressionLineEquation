@@ -11,6 +11,28 @@
 
 ---
 
+
+
+---
+
+## 🔽 Download
+
+📦 Grab the latest stable release:
+➡️ **[Download v3.4 for Windows (.exe)](https://github.com/jentimanatol/RegressionLineEquation/releases/download/v2.0/RegressionLineEquation.exe)**
+
+📁 Need older versions or want to check the source code?
+🔍 **[Browse all releases](https://github.com/jentimanatol/RegressionLineEquation/releases)**
+
+---
+
+
+
+
+
+
+
+
+
 ## 🔍 Features
 
 - 📌 **Input**: Paste or type (x, y) pairs as Python-style tuples (e.g. `[(1, 2), (3, 4)]`)
@@ -35,6 +57,12 @@
 - High school and university educators
 - Engineers and analysts
 - Anyone who needs quick linear regression with interpretation
+
+
+
+
+
+
 
 ---
 
