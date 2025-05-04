@@ -54,7 +54,7 @@
 
 ## 📷 Screenshot
 
-![App Screenshot](screenshots/Screenshot2.png)
+![App Screenshot](screenshots/Screenshot3.png)
 
 ---
 
@@ -63,12 +63,6 @@
 Made with care and precision by [Anatolie Jentimir](https://github.com/jentimanatol) — 2025.
 
 Special thanks to the scientific community for inspiring this contribution to analytical tools in research.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
