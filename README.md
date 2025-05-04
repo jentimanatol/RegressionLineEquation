@@ -1,136 +1,94 @@
+# 📈 Regression Line Analyzer
+
+[![GitHub release](https://img.shields.io/github/v/release/jentimanatol/RegressionLineEquation)](https://github.com/jentimanatol/RegressionLineEquation/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+> Developed by **Anatolie Jentimir** – Designed for scientists, researchers, educators, and data enthusiasts.
+
+**Regression Line Analyzer** is a desktop application built with Python and Tkinter to help you **analyze**, **visualize**, and **understand** linear relationships between two variables through correlation and regression. This intuitive app is now being used in scientific labs for data-driven discoveries and innovations.
+
+![Screenshot](screenshots/Screenshot2.png)
 
 ---
 
-# 📊 **Critical r-value Calculator & Visualizer by AJ**
+## 🔍 Features
 
-![Release](https://img.shields.io/github/v/release/jentimanatol/CriticalRValueApp?label=Latest%20Release\&style=for-the-badge)
-![Platform](https://img.shields.io/badge/platform-Windows-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-
-> 🎓 A no-code, visual approach to mastering **statistical significance** and **Pearson correlation thresholds** — ideal for learning, teaching, and real-world analysis.
-
----
-
-## 🧾 About This Project
-
-This application was created as part of my personal portfolio to demonstrate my ability to design clean, functional, and mathematically-accurate software tools for data analysis and education perfect for Statistics I MAT-181.
-
-**Critical r-value Calculator & Visualizer** is more than just a calculator — it's a learning assistant. Designed for both beginners and professionals in statistics, the app simplifies complex statistical formulas into an interactive, visual experience. It reflects my interests in:
-
-* Applied statistics
-* GUI design and usability
-* Data-driven decision-making
-* Clear scientific communication
-
-This project showcases my proficiency in **Python 3**, **Tkinter**, **matplotlib**, and statistical logic implementation, while focusing on clean UX principles and code modularity.
+- 📌 **Input**: Paste or type (x, y) pairs as Python-style tuples (e.g. `[(1, 2), (3, 4)]`)
+- 📊 **Automatic Computation**:
+  - Scatter plot generation
+  - Best fit line calculation (via least squares method)
+  - Pearson correlation coefficient (r)
+- 🧠 **Interpretation**: Clear textual interpretation of the r-value (strength and direction)
+- 📑 **Data Summary**: Tabulated view of `x`, `y`, `x²`, `y²`, and `xy`
+- 💾 **Save Options**:
+  - Export plot as `.png`
+  - Export table and summary as `.txt`
+- 🧮 **Formula Display**: Mathematical explanation of how r is calculated
+- 🌐 **Modern GUI**: User-friendly layout with styled panels and emoji icons
 
 ---
 
-## 🔽 Download
+## 🧪 Ideal For:
 
-📦 Grab the latest stable release:
-➡️ **[Download v3.4 for Windows (.exe)](https://github.com/jentimanatol/CriticalRValueApp/releases/download/v3.4/critical_r_value_app.exe)**
-
-📁 Need older versions or want to check the source code?
-🔍 **[Browse all releases](https://github.com/jentimanatol/CriticalRValueApp/releases)**
-
----
-
-## 🚀 Features Overview
-
-* 🔢 **Instant r-value calculation** using input α and sample size
-* 📈 **Live plot visualization** of r\_critical values vs. sample size
-* 💾 **Save your graph** as PNG — perfect for academic reports
-* 📘 **Transparent formula explanations** with each result
-* 🎨 **User-friendly GUI**, optimized for clarity and focus
+- Research laboratories
+- Data science and statistics students
+- High school and university educators
+- Engineers and analysts
+- Anyone who needs quick linear regression with interpretation
 
 ---
 
-## 🧑‍🏫 Who Should Use This?
+## 🚀 Getting Started
 
-This app is tailored for:
+### 📦 Requirements
 
-* 📚 **Students** learning statistical significance and hypothesis testing
-* 🧪 **Researchers** working with correlation coefficients
-* 👩‍🏫 **Teachers & professors** explaining r-value thresholds
-* 📊 **Data analysts** validating correlation strength in datasets
+- Python 3.11+
+- Required libraries: `matplotlib`, `numpy`, `tkinter` (built-in)
 
-Whenever you're working with **Pearson correlation coefficients**, it’s critical to assess whether your r-value is statistically significant. This app helps **demystify that threshold** and lets you explore how it evolves with varying sample sizes and confidence levels.
+### 💡 Installation
 
----
+Clone this repo or download the latest [release](https://github.com/jentimanatol/RegressionLineEquation/releases):
 
-## 🛠️ How It Works
-
-1. **Enter Significance Level (α)**
-   Example: `0.05` (which represents 95% confidence)
-
-2. **Enter Sample Size (n)**
-   Must be `3` or more (e.g., `14`, `25`, `100`)
-
-3. **Click “Calculate & Plot”**
-   The app will generate:
-
-   * Critical r-value (both positive and negative)
-   * Degrees of freedom and t-critical value
-   * Formula explanation
-   * A plot showing r\_critical as n increases
-
-4. **Click “💾 Save Plot”**
-   Instantly export the chart as a `.png` file for documentation or presentations.
-
----
-
-## 🖼️ App Preview
-![Screenshots](screenshots/screenshots.png)
-![Screenshots](screenshots/onetiled_plot.png)
-![Screenshots](screenshots/v1screenshots.png)
-
-
-
-
-
-*A clear, interactive interface for exploring statistical thresholds.*
-
----
-
-## 🧠 Core Mathematical Concepts
-
-```txt
-Degrees of Freedom (df): df = n - 2  
-t-critical:               Two-tailed t-distribution at chosen α  
-r-critical formula:       r = t / √(t² + df)
+```bash
+git clone https://github.com/jentimanatol/RegressionLineEquation.git
+cd RegressionLineEquation
+python regression_app.py
 ```
-![Formula used](screenshots/formulas.png)
 
-
-All calculations follow standard statistical principles and are dynamically updated based on input.
+Alternatively, download the `.exe` (no Python needed) from [Releases](https://github.com/jentimanatol/RegressionLineEquation/releases) and run it directly on Windows.
 
 ---
 
-## 💡 Why I Built This
+## ✨ Example Input
 
-I created this project to bridge the gap between **theory and practice** in statistics. Too often, critical values are memorized or looked up in tables without true understanding. This tool encourages **exploration and experimentation**, helping users develop an intuitive grasp of how significance thresholds behave.
-
-As a passionate learner and problem solver, I wanted to combine **statistical precision**, **code elegance**, and **accessibility** — all wrapped in a simple executable anyone can use.
-
----
-
-## 🛠 Tech Stack
-
-* `Python 3.11+`
-* `Tkinter` (for GUI)
-* `matplotlib` (for plotting)
-* `threading` (for responsive user interaction)
-* `PyInstaller` (for compiling to `.exe`)
+```
+[(2, 7), (4, 11), (5, 13), (6, 20)]
+```
 
 ---
 
-## 📃 License & Credits
+## 📷 Screenshot
 
-🆓 **MIT License** — free to use, modify, and distribute.
+![App Screenshot](screenshots/Screenshot2.png)
 
-👤 Created by **Anatolie Jentimir**
-📅 2025
+---
 
-*Feel free to use, improve, or fork this project. If you do, I’d love to see how it grows!*
+## 🙌 Credits
 
+Made with care and precision by [Anatolie Jentimir](https://github.com/jentimanatol) — 2025.
+
+Special thanks to the scientific community for inspiring this contribution to analytical tools in research.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## ⭐ Show Your Support
+
+If you like this tool, consider giving it a ⭐ on GitHub! It motivates us to continue developing open scientific software.
+
+---
