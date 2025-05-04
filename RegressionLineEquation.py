@@ -165,4 +165,10 @@ summary_label.pack(pady=(0, 10), padx=5, anchor="w")
 interpretation_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", font=("Courier", 20), wraplength=750)
 interpretation_label.pack(pady=(5, 10), padx=5, anchor="w")
 
+#root.mainloop()
+
+# Ensure full shutdown when window is closed
+root.protocol("WM_DELETE_WINDOW", exit_app)
+
 root.mainloop()
+
