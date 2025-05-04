@@ -40,22 +40,7 @@
 
 ## 🚀 Getting Started
 
-### 📦 Requirements
-
-- Python 3.11+
-- Required libraries: `matplotlib`, `numpy`, `tkinter` (built-in)
-
-### 💡 Installation
-
-Clone this repo or download the latest [release](https://github.com/jentimanatol/RegressionLineEquation/releases):
-
-```bash
-git clone https://github.com/jentimanatol/RegressionLineEquation.git
-cd RegressionLineEquation
-python regression_app.py
-```
-
-Alternatively, download the `.exe` (no Python needed) from [Releases](https://github.com/jentimanatol/RegressionLineEquation/releases) and run it directly on Windows.
+ download the `.exe` (no Python needed) from [Releases](https://github.com/jentimanatol/RegressionLineEquation/releases) and run it directly on Windows.
 
 ---
 
