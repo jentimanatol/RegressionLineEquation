@@ -7,7 +7,7 @@
 
 **Regression Line Analyzer** is a desktop application built with Python and Tkinter to help you **analyze**, **visualize**, and **understand** linear relationships between two variables through correlation and regression. This intuitive app is now being used in scientific labs for data-driven discoveries and innovations.
 
-![Screenshot](screenshots/Screenshot2.png)
+![Screenshot](screenshots/Screenshot3.png)
 
 ---
 
