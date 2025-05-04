@@ -7,7 +7,7 @@ import ast
 
 # Create root window
 root = tk.Tk()
-root.title("Linear Regression Calculator by Anatolie Jentimir")
+root.title("Regression Line Analyzer by Anatolie Jentimir")
 root.geometry("2500x1750")
 
 # Matplotlib figure and axis
@@ -40,18 +40,24 @@ def compute_and_plot(data):
         sum_y2 = sum(y_squared)
         sum_xy = sum(xy_products)
 
-        # Calculate slope (b) and intercept (a) using formulas
-        b_numerator = n * sum_xy - sum_x * sum_y
-        b_denominator = n * sum_x2 - sum_x**2
-        b = b_numerator / b_denominator if b_denominator != 0 else 0
-        a = (sum_y - b * sum_x) / n if n != 0 else 0
+        # Calculate correlation coefficient (r)
+        numerator = n * sum_xy - sum_x * sum_y
+        denominator = np.sqrt((n * sum_x2 - sum_x**2) * (n * sum_y2 - sum_y**2))
+        r = numerator / denominator if denominator != 0 else 0
 
-        y_fit = [b * x + a for x in x_vals]
-        ax.plot(x_vals, y_fit, color='red', label=f"Best Fit Line: y = {b:.3f}x + {a:.3f}")
+        # Linear regression using least squares
+        slope, intercept = np.polyfit(x_vals, y_vals, 1)
+        y_fit = [slope * x + intercept for x in x_vals]
+        ax.plot(x_vals, y_fit, color='red', label=f"Best Fit Line: y = {slope:.3f}x + {intercept:.3f}")
 
+        # Scatter plot
         ax.scatter(x_vals, y_vals, color='blue', s=100, label='Data Points')
 
-        ax.set_title("Linear Regression: y = a + bx", fontsize=22)
+        # Annotate r-value
+        ax.annotate(f'r = {r:.4f}', xy=(0.05, 0.95), xycoords='axes fraction',
+                    fontsize=14, backgroundcolor='white')
+
+        ax.set_title("Linear Regression: y = mx + b", fontsize=22)
         ax.set_xlabel("x", fontsize=18)
         ax.set_ylabel("y", fontsize=18)
         ax.grid(True)
@@ -59,34 +65,65 @@ def compute_and_plot(data):
 
         canvas.draw()
 
+        # Table display
         table_text = "x\t y\t x²\t y²\t xy\n"
         for x, y, x2, y2, xy in zip(x_vals, y_vals, x_squared, y_squared, xy_products):
             table_text += f"{x}\t {y}\t {x2}\t {y2}\t {xy}\n"
         table_label.config(text=table_text)
 
         summary_text = f"""
-Step 1: Compute necessary values
-n = {n}
 Σx = {sum_x}
 Σy = {sum_y}
-Σxy = {sum_xy}
 Σx² = {sum_x2}
+Σy² = {sum_y2}
+Σxy = {sum_xy}
+n = {n}
 
-Step 2: Compute slope (b)
-b = [nΣxy - (Σx)(Σy)] / [nΣx² - (Σx)²]
-b = [{n}*{sum_xy} - ({sum_x}*{sum_y})] / [{n}*{sum_x2} - ({sum_x})²]
-b = {b:.4f}
+Numerator = n * Σxy - Σx * Σy 
+Denominator =
+= √[(n * Σx² - (Σx)²) * (n * Σy² - (Σy)²)] 
+Numerator = {numerator}
+Denominator = {denominator:.4f}
 
-Step 3: Compute intercept (a)
-a = [Σy - bΣx] / n
-a = [{sum_y} - {b:.4f}*{sum_x}] / {n}
-a = {a:.4f}
+r = {r:.4f}
 """
         summary_label.config(text=summary_text)
 
-        interpretation_label.config(
-            text=f"Resulting Line Equation:\n\ny = {a:.4f} + {b:.4f}x"
+        # Interpretation
+        if r >= 0.9:
+            desc = "Very strong positive correlation"
+        elif r >= 0.7:
+            desc = "Strong positive correlation"
+        elif r >= 0.5:
+            desc = "Moderate positive correlation"
+        elif r >= 0.3:
+            desc = "Weak positive correlation"
+        elif r > 0:
+            desc = "Very weak positive correlation"
+        elif r == 0:
+            desc = "No correlation"
+        elif r > -0.3:
+            desc = "Very weak negative correlation"
+        elif r > -0.5:
+            desc = "Weak negative correlation"
+        elif r > -0.7:
+            desc = "Moderate negative correlation"
+        elif r > -0.9:
+            desc = "Strong negative correlation"
+        else:
+            desc = "Very strong negative correlation"
+
+        interpretation_text = (
+            "Correlation Coefficient Analysis:\n"
+            f"r = {r:.4f}\n"
+            f"Interpretation: → {desc}\n\n"
+            "Understanding r:\n"
+            "r = 1: Perfect positive linear correlation\n"
+            "r = -1: Perfect negative linear correlation\n"
+            "r = 0: No linear correlation\n\n"
+            "Anatolie Jentimir, 2025"
         )
+        interpretation_label.config(text=interpretation_text)
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
@@ -122,7 +159,7 @@ def exit_app():
 # Layout
 top_frame = tk.Frame(root, bg="#e6f0ff", padx=10, pady=5)
 top_frame.pack(fill=tk.X)
-tk.Label(top_frame, text="📈 Linear Regression Calculator", bg="#e6f0ff", font=("Arial", 28, "bold")).pack(side=tk.LEFT)
+tk.Label(top_frame, text="📈 Regression Line Analyzer", bg="#e6f0ff", font=("Arial", 28, "bold")).pack(side=tk.LEFT)
 
 control_frame = tk.Frame(root, pady=10)
 control_frame.pack(fill=tk.X)
@@ -161,6 +198,21 @@ table_label.pack(pady=(0, 10), padx=5, anchor="w")
 
 summary_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", font=("Courier", 20))
 summary_label.pack(pady=(0, 10), padx=5, anchor="w")
+
+tk.Label(right_panel, text="📐 Regression Formula", font=("Helvetica", 26, "bold"), bg="#f0f6ff", fg="#003366").pack(pady=(5, 2))
+tk.Label(
+    right_panel,
+    text=(
+        "r = [nΣxy - (Σx)(Σy)] / \n"
+        "   √{[nΣx² - (Σx)²][nΣy² - (Σy)²]}\n\n"
+        "Where:\n"
+        "Σxy = sum of x*y products\n"
+        "Σx² = sum of x squared\n"
+        "Σy² = sum of y squared\n"
+        "n = number of data pairs"
+    ),
+    bg="#f0f6ff", justify="left", font=("Courier", 20), fg="#2c3e50"
+).pack(pady=(0, 8), padx=5, anchor="w")
 
 interpretation_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", font=("Courier", 20), wraplength=750)
 interpretation_label.pack(pady=(5, 10), padx=5, anchor="w")
